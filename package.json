@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "start:js": "npm run build && node dist/.",
+    "start:js": "node dist/.",
+    "prestart:js": "npx tsc",
     "start": "nodemon src/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
