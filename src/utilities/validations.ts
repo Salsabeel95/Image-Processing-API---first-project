@@ -1,12 +1,12 @@
 import fs from 'fs'
 import sharp from 'sharp'
 import path from 'path'
-import { NextFunction, Request,Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
 const inputDirctory = 'full'
 const outputDirctory = 'thumb'
 
-const makeOutputDirctoryIfNeeded = async () :Promise<void>=> {
+const makeOutputDirctoryIfNeeded = async (): Promise<void> => {
   const imagesDir = path.join(__dirname, '..', '..', outputDirctory)
   if (!fs.existsSync(imagesDir)) {
     await fs.promises.mkdir(imagesDir)
@@ -29,12 +29,10 @@ export const fileNameValidation = (
     if (images.includes(filename + '.jpg')) {
       next()
     } else {
-      res
-        .status(404)
-        .json({
-          message:
-            'image name must be one of the following: ' + imagesAvailableNames,
-        })
+      res.status(404).json({
+        message:
+          'image name must be one of the following: ' + imagesAvailableNames,
+      })
     }
   }
 }
@@ -81,8 +79,11 @@ export const widthHeightValidation = async (
   ) {
     // provided valid width or height or both
     console.log('provided valid width or height or both')
-    doesImgNeedCache(width  as unknown as string , height  as unknown as string, filename  as unknown as string) &&
-      (await resizeImg(+width, +height, filename as unknown as string))
+    doesImgNeedCache(
+      width as unknown as string,
+      height as unknown as string,
+      filename as unknown as string
+    ) && (await resizeImg(+width, +height, filename as unknown as string))
     next()
   } else {
     // only one of them provided
@@ -95,12 +96,15 @@ export const widthHeightValidation = async (
       res
         .status(400)
         .json({ message: 'dimensions must be a postive number greater than 0' })
-    }
-    else {
-        // provided valid width or height
-        console.log('provided valid width or height ')
-        doesImgNeedCache(width as unknown as string, height  as unknown as string, filename  as unknown as string) && await resizeImg(+width, +height, filename  as unknown as string)
-        next()
+    } else {
+      // provided valid width or height
+      console.log('provided valid width or height ')
+      doesImgNeedCache(
+        width as unknown as string,
+        height as unknown as string,
+        filename as unknown as string
+      ) && (await resizeImg(+width, +height, filename as unknown as string))
+      next()
     }
   }
 }

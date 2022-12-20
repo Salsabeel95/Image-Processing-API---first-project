@@ -53,22 +53,21 @@ For development, you will only need Node.js and a node global package, Yarn, ins
 ```
 ## API Reference
 
-#### Request: Get image with filename default resize
+#### Request: Get resized image
 
-Image with filename will resized in 'thumb' folder with 200 px width and height by default , unless otherwise specified. 
+Image with the filename will resize in the 'thumb' folder with 200 px width and height by default unless otherwise specified.  
 
 ```http
-  GET /api/images?filename=${filename}&width=${width}
+  GET /api/images?filename=${filename}&width=${width}&height=${height}
 ```
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `filename` | `string` | **Required**. Image name to be resize from 'full' images folder |
-| `width` | `number` | **Optional (greater than 0)**. Image width to be resized with. It has 200 px as default value|
-| `height` | `number` | **Optional (greater than 0)**. Image height to be resized with. It has 200 px as default value|
+| `width` | `number` | **Optional (greater than 0)**. Image width to be resized with. It is 200 px as default value|
+| `height` | `number` | **Optional (greater than 0)**. Image height to be resized with. It is 200 px as default value|
 
 #### Response: Get resized image
-Resized image will be send in the response after resizing process with caching it if needed 
-
+Resized image will be send in the response after resizing process or caching if needed.
 
 ## Technology stack:
 - [typescript](https://www.npmjs.com/package/typescript) : For development.
