@@ -6,7 +6,7 @@ import { NextFunction, Request,Response } from 'express'
 const inputDirctory = 'full'
 const outputDirctory = 'thumb'
 
-const makeOutputDirctoryIfNeeded = async () => {
+const makeOutputDirctoryIfNeeded = async () :Promise<void>=> {
   const imagesDir = path.join(__dirname, '..', '..', outputDirctory)
   if (!fs.existsSync(imagesDir)) {
     await fs.promises.mkdir(imagesDir)
@@ -38,7 +38,7 @@ export const fileNameValidation = (
     }
   }
 }
-const doesImgNeedCache = (
+export const doesImgNeedCache = (
   width: string,
   height: string,
   filename: string
@@ -49,7 +49,7 @@ const doesImgNeedCache = (
   return !imagesAvailable.includes(newImgName) ? true : false
 }
 
-const resizeImg = async (
+export const resizeImg = async (
   width: number,
   height: number,
   filename: string
