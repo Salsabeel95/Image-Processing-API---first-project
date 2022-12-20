@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
     "start:js": "node dist/.",
-    "prestart:js": "npx tsc",
+    "prestart:js": "node dist/utilities/setupAssetsDirectory",
     "start": "nodemon src/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
