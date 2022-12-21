@@ -6,14 +6,12 @@ const outputDirctory = 'thumb'
 const imagesDirInDist = path.join(__dirname, '..', outputDirctory)
 const imagesDirInSrc = path.join(__dirname, '..', '..', outputDirctory)
 
-async function setupDirctoryInDist(distPath: string, srcPath: string) {
+async function setupDirctoryInDist(distPath: string, srcPath: string) :Promise<void>{
   fs.existsSync(distPath) && (await rm(distPath, { recursive: true }))
   !fs.existsSync(distPath) && (await mkdir(distPath))
-  fs.existsSync(distPath) && fs.readdirSync(srcPath).forEach(async (file) => {
-      await copyFile(
-        path.join(srcPath, file),
-        path.join(imagesDirInDist, file)
-      )
+  fs.existsSync(distPath) &&
+    fs.readdirSync(srcPath).forEach(async (file) => {
+      await copyFile(path.join(srcPath, file), path.join(imagesDirInDist, file))
       console.log(file)
     })
 }
